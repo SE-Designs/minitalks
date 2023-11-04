@@ -13,8 +13,14 @@
         <Icon name="pixelarticons:downasaur" />
         <h1>minitalks</h1>
       </NuxtLink>
-      <p>minitalks - max length 80</p>
-      <a href="#" class="font-bold link-neutral link-hover"> source code </a>
+      <p>minitalks - mini social network for mini notes</p>
+      <a
+        href="https://github.com/SE-Designs/minitalks"
+        class="flex flex-row items-center gap-x-2"
+      >
+        <Icon name="pixelarticons:git-commit" class="text-info" />
+        <span class="font-bold link-info link-hover"> source code </span>
+      </a>
     </div>
   </div>
 </template>

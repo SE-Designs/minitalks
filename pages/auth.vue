@@ -47,7 +47,7 @@ const auth = ref("sign-in");
             for="signin-username"
             class="flex flex-row gap-x-2 items-center text-sm"
           >
-            <Icon name="pixelarticons:alert" />
+            <Icon name="pixelarticons:flag" />
             <span>Username</span>
           </label>
           <input
@@ -64,7 +64,7 @@ const auth = ref("sign-in");
             for="signin-password"
             class="flex flex-row gap-x-2 items-center text-sm"
           >
-            <Icon name="pixelarticons:alert" />
+            <Icon name="pixelarticons:flag" />
             <span>Password</span>
           </label>
           <input
@@ -87,7 +87,7 @@ const auth = ref("sign-in");
             for="signup-username"
             class="flex flex-row gap-x-2 items-center text-sm"
           >
-            <Icon name="pixelarticons:alert" />
+            <Icon name="pixelarticons:flag" />
             <span>Username</span>
           </label>
           <input
@@ -104,7 +104,7 @@ const auth = ref("sign-in");
             for="signup-password"
             class="flex flex-row gap-x-2 items-center text-sm"
           >
-            <Icon name="pixelarticons:alert" />
+            <Icon name="pixelarticons:flag" />
             <span>Password</span>
           </label>
           <input
@@ -120,7 +120,7 @@ const auth = ref("sign-in");
             for="signup-repeat"
             class="flex flex-row gap-x-2 items-center text-sm"
           >
-            <Icon name="pixelarticons:alert" />
+            <Icon name="pixelarticons:flag" />
             <span>Repeat password</span>
           </label>
           <input
@@ -136,13 +136,13 @@ const auth = ref("sign-in");
     </div>
     <div class="flex flex-col">
       <h1 class="text-5xl font-black mb-8">
-        Hello,
-        <span class="text-primary">{{
-          signInValue.username
-            ? signInValue.username
-            : signUpValue.username
-            ? signUpValue.username
-            : "minitalker"
+        <span v-if="auth === 'sign-in'">Hello, </span>
+        <span v-else>Welcome, </span>
+        <span class="text-primary" v-if="auth === 'sign-in'">{{
+          signInValue.username ? signInValue.username : "minitalker"
+        }}</span>
+        <span class="text-primary" v-else>{{
+          signUpValue.username ? signUpValue.username : "minitalker"
         }}</span>
       </h1>
       <h3
