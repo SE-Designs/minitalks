@@ -2,7 +2,7 @@
 const show = ref("latest");
 </script>
 <template>
-  <div class="flex flex-row justify-between items-center">
+  <div class="flex flex-col justify-between items-center sm:flex-row">
     <p class="text-secondary font-bold">showing {{ show }}:</p>
     <div class="flex flex-row items-center gap-x-4 font-bold">
       <div
