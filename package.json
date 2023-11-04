@@ -7,13 +7,14 @@
     "daisyui": "^3.9.4",
     "nuxt": "^3.8.0",
     "nuxt-icon": "^0.6.1",
+    "prisma": "^5.5.2",
     "vue": "^3.3.7",
     "vue-router": "^4.2.5"
   },
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
