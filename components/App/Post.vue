@@ -13,7 +13,7 @@ sit amet consectetur, adipisicing elit.
 <template>
   <article class="flex flex-row items-center">
     <div class="flex flex-col gap-4 w-full bg-base-100 rounded-lg p-4">
-      <div class="flex flex-row justify-between items-center gap-8">
+      <div class="flex flex-row justify-between items-center gap-4">
         <!-- avatar img or downsaur icon -->
         <div class="flex flex-row items-center gap-4">
           <NuxtLink

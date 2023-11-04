@@ -13,7 +13,7 @@
         <Icon name="pixelarticons:downasaur" />
         <h1>minitalks</h1>
       </NuxtLink>
-      <p>minitalks - mini social network for mini notes</p>
+      <!-- <p>minitalks - mini social network for mini notes</p> -->
       <a
         href="https://github.com/SE-Designs/minitalks"
         class="flex flex-row items-center gap-x-2"

@@ -1,12 +1,14 @@
 <script setup lang="ts"></script>
 <template>
-  <aside class="flex flex-col gap-y-8 w-[400px]">
+  <aside class="hidden flex-col gap-y-4 mx-auto xl:gap-y-8 w-[280px] md:flex">
     <input
       type="text"
       placeholder="Search..."
       class="input input-primary input-bordered w-full max-w-xs"
     />
-    <div class="flex flex-col gap-y-2 bg-neutral px-8 py-6 rounded-lg">
+    <div
+      class="flex flex-col gap-y-2 bg-neutral px-4 py-3 rounded-lg xl:px-8 xl:py-6"
+    >
       <h2 class="font-bold">Trending topics</h2>
       <NuxtLink
         to="/"
@@ -125,10 +127,14 @@
     <div class="flex flex-col gap-1 text-xs text-neutral-content">
       <div class="flex flex-row gap-x-2 items-center">
         <span>stable version: 1.0</span>
-        <Icon name="pixelarticons:check" />
+        <Icon name="pixelarticons:check" class="min-w-[14px] min-h-[14px]" />
       </div>
       <div class="flex flex-row gap-x-2 items-center">
         <span>author: mixturegg</span>
+        <Icon
+          name="pixelarticons:external-link"
+          class="min-w-[14px] min-h-[14px]"
+        />
       </div>
     </div>
   </aside>
