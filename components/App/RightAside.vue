@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <aside class="flex flex-col gap-y-8 w-[360px]">
+  <aside class="flex flex-col gap-y-8 w-[400px]">
     <input
       type="text"
       placeholder="Search..."
@@ -121,6 +121,15 @@
           <span>mixture_gg</span>
         </div>
       </NuxtLink>
+    </div>
+    <div class="flex flex-col gap-1 text-xs text-neutral-content">
+      <div class="flex flex-row gap-x-2 items-center">
+        <span>stable version: 1.0</span>
+        <Icon name="pixelarticons:check" />
+      </div>
+      <div class="flex flex-row gap-x-2 items-center">
+        <span>author: mixturegg</span>
+      </div>
     </div>
   </aside>
 </template>

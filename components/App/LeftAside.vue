@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <aside class="flex flex-col gap-y-8 w-[200px]">
+  <aside class="flex flex-col gap-y-8 w-[240px]">
     <div class="flex flex-col gap-y-2 p-4 bg-neutral rounded-lg">
       <NuxtLink to="/" class="btn btn-ghost"> Home</NuxtLink>
       <NuxtLink to="/" class="btn btn-ghost"> Explore</NuxtLink>
