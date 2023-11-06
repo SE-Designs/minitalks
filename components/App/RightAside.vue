@@ -1,11 +1,18 @@
 <script setup lang="ts"></script>
 <template>
   <aside class="hidden flex-col gap-y-4 mx-auto xl:gap-y-8 w-[280px] md:flex">
-    <input
-      type="text"
-      placeholder="Search..."
-      class="input input-primary input-bordered w-full max-w-xs"
-    />
+    <div
+      class="flex flex-row justify-center items-center w-full gap-x-4 max-w-[360px] xl:gap-x-6"
+    >
+      <input
+        type="text"
+        placeholder="Search..."
+        class="input input-primary input-bordered w-full"
+      />
+      <div class="btn btn-primary">
+        <Icon name="pixelarticons:search" />
+      </div>
+    </div>
     <div
       class="flex flex-col gap-y-2 bg-neutral px-4 py-3 rounded-lg xl:px-8 xl:py-6"
     >
@@ -73,7 +80,7 @@
         class="flex flex-row gap-x-2 justify-between items-center font-bold"
       >
         <div
-          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-accent"
+          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-info"
         >
           <Icon name="pixelarticons:user" />
           <span>7Vers</span>
@@ -84,7 +91,7 @@
         class="flex flex-row gap-x-2 justify-between items-center font-bold"
       >
         <div
-          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-accent"
+          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-info"
         >
           <Icon name="pixelarticons:user" />
           <span>IGClan</span>
@@ -95,7 +102,7 @@
         class="flex flex-row gap-x-2 justify-between items-center font-bold"
       >
         <div
-          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-accent"
+          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-info"
         >
           <Icon name="pixelarticons:user" />
           <span>DDDance</span>
@@ -106,7 +113,7 @@
         class="flex flex-row gap-x-2 justify-between items-center font-bold"
       >
         <div
-          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-accent"
+          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-info"
         >
           <Icon name="pixelarticons:user" />
           <span>YOLO_creator</span>
@@ -117,7 +124,7 @@
         class="flex flex-row gap-x-2 justify-between items-center font-bold"
       >
         <div
-          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-accent"
+          class="flex flex-row gap-x-2 items-center justify-center link link-hover link-info"
         >
           <Icon name="pixelarticons:user" />
           <span>mixture_gg</span>
