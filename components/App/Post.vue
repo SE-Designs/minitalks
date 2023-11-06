@@ -93,7 +93,7 @@ sit amet consectetur, adipisicing elit.
         <div
           class="w-[40px] h-[40px] min-w-[40px] min-h-[40px] flex justify-center items-center rounded-full bg-base-100 hover:bg-info hover:text-info-content"
         >
-          <Icon name="pixelarticons:message-text" />
+          <Icon name="pixelarticons:message-arrow-right" />
         </div>
         <p class="text-sm font-semibold">3</p>
       </button>
