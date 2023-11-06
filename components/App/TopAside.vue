@@ -1,35 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useWriteModal } from "#imports";
+</script>
 <template>
-  <nav
-    class="fixed left-1/2 bottom-0 pb-12 flex flex-row justify-center items-center gap-x-4 max-h-[64px] -translate-x-1/2 sm:hidden"
-  >
-    <div
-      class="flex flex-row gap-x-4 rounded-lg p-2 border border-neutral backdrop-blur"
-      style="
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.2),
-          rgba(0, 0, 0, 0.8)
-        );
-      "
-    >
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:home" class="block xl:hidden" />
-      </NuxtLink>
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:map" class="block xl:hidden" />
-      </NuxtLink>
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:user" class="block xl:hidden" />
-      </NuxtLink>
-      <div class="btn btn-ghost" onclick="write.showModal()">
-        <Icon name="pixelarticons:edit" />
-      </div>
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:logout" class="block xl:hidden" />
-      </NuxtLink>
-    </div>
-  </nav>
   <aside
     class="flex flex-col gap-4 justify-center items-center w-full md:hidden"
   >
@@ -190,4 +162,35 @@
       </form>
     </dialog>
   </aside>
+  <nav
+    class="fixed left-1/2 bottom-0 pb-12 flex flex-row justify-center items-center gap-x-4 max-h-[64px] -translate-x-1/2 sm:hidden"
+  >
+    <div
+      class="flex flex-row gap-x-4 rounded-lg p-2 border border-neutral backdrop-blur"
+      style="
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0.8)
+        );
+      "
+    >
+      <NuxtLink to="/" class="btn btn-ghost">
+        <Icon name="pixelarticons:home" class="block xl:hidden" />
+      </NuxtLink>
+      <NuxtLink to="/" class="btn btn-ghost">
+        <Icon name="pixelarticons:map" class="block xl:hidden" />
+      </NuxtLink>
+      <NuxtLink to="/" class="btn btn-ghost">
+        <Icon name="pixelarticons:user" class="block xl:hidden" />
+      </NuxtLink>
+      <div class="btn btn-ghost" @click="useWriteModal">
+        <Icon name="pixelarticons:edit" />
+      </div>
+      <NuxtLink to="/" class="btn btn-ghost">
+        <Icon name="pixelarticons:logout" class="block xl:hidden" />
+      </NuxtLink>
+    </div>
+  </nav>
 </template>
+<style scoped></style>
