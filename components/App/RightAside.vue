@@ -1,6 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <aside class="hidden flex-col gap-y-4 mx-auto xl:gap-y-8 w-[280px] md:flex">
+  <aside
+    class="hidden flex-col gap-y-4 mx-auto xl:gap-y-8 w-[280px] h-fit md:flex sticky left-0 top-28"
+  >
     <div
       class="flex flex-row justify-center items-center w-full gap-x-4 max-w-[360px] xl:gap-x-6"
     >
