@@ -21,7 +21,7 @@ const auth = ref("sign-in");
     class="flex flex-row flex-wrap-reverse justify-between items-center gap-12 min-h-screen p-8"
   >
     <div
-      class="flex flex-col p-8 bg-neutral rounded-lg flex-1 min-w-[320px] w-full max-w-[520px] mx-auto"
+      class="flex flex-col p-4 bg-neutral rounded-lg flex-1 min-w-[320px] w-full max-w-[520px] mx-auto"
     >
       <div class="flex flex-row items-center gap-x-4 mx-auto">
         <NuxtLink
@@ -138,10 +138,10 @@ const auth = ref("sign-in");
       <h1 class="text-5xl font-black mb-8">
         <span v-if="auth === 'sign-in'">Hello, </span>
         <span v-else>Welcome, </span>
-        <span class="text-primary" v-if="auth === 'sign-in'">{{
+        <span class="text-gradient" v-if="auth === 'sign-in'">{{
           signInValue.username ? signInValue.username : "minitalker"
         }}</span>
-        <span class="text-primary" v-else>{{
+        <span class="text-gradient" v-else>{{
           signUpValue.username ? signUpValue.username : "minitalker"
         }}</span>
       </h1>
