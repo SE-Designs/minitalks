@@ -22,7 +22,9 @@ sit amet consectetur, adipisicing elit.
         <Icon name="pixelarticons:more-vertical" />
       </button>
     </div>
-    <div class="flex flex-col gap-4 w-full bg-base-100 rounded-lg p-4">
+    <div
+      class="flex flex-col gap-4 w-full bg-base-100 rounded-lg p-4 border border-transparent"
+    >
       <div class="flex flex-row justify-between items-center gap-4">
         <!-- avatar img or downsaur icon -->
         <div class="flex flex-row items-center gap-4">
