@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { isWriteModalOpen } from "#imports";
+</script>
 <template>
   <header>
     <LayoutNav />
@@ -7,5 +9,16 @@
     class="mt-[60px] flex flex-col justify-center items-center max-w-[1480px] w-full mx-auto"
   >
     <slot />
+    <dialog
+      id="write"
+      class="flex justify-center items-center"
+      :class="isWriteModalOpen ? 'modal modal-open' : 'modal'"
+      @click.self="useWriteModal"
+    >
+      <AppWrite />
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
   </main>
 </template>
