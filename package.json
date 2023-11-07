@@ -4,8 +4,8 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.9.4",
     "@tailwindcss/typography": "^0.5.10",
-    "@types/bcrypt": "^5.0.2",
-    "bcrypt": "^5.1.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
     "daisyui": "^3.9.4",
     "nuxt": "^3.8.0",
     "nuxt-icon": "^0.6.1",
@@ -24,6 +24,8 @@
   "type": "module",
   "dependencies": {
     "@prisma/client": "5.5.2",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.2.0"
   }
 }
