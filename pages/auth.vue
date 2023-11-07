@@ -9,6 +9,7 @@ const signInValue = ref({
 });
 
 const signUpValue = ref({
+  email: "",
   username: "",
   password: "",
   repeat: "",
@@ -48,14 +49,14 @@ const auth = ref("sign-in");
             class="flex flex-row gap-x-2 items-center text-sm"
           >
             <Icon name="pixelarticons:flag" />
-            <span>Username</span>
+            <span>Email or username</span>
           </label>
           <input
             id="signin-username"
             type="text"
             v-model.value="signInValue.username"
             maxlength="12"
-            placeholder="Username"
+            placeholder="Email or username"
             class="input input-bordered w-full text-white"
           />
         </div>
@@ -82,6 +83,23 @@ const auth = ref("sign-in");
         v-else
       >
         <h3 class="text-xl font-bold mt-4">Sign Up</h3>
+        <div class="flex flex-col text-left w-full gap-1">
+          <label
+            for="signup-email"
+            class="flex flex-row gap-x-2 items-center text-sm"
+          >
+            <Icon name="pixelarticons:flag" />
+            <span>Email</span>
+          </label>
+          <input
+            id="signup-email"
+            type="email"
+            v-model.value="signUpValue.email"
+            maxlength="12"
+            placeholder="Email"
+            class="input input-bordered w-full text-white"
+          />
+        </div>
         <div class="flex flex-col text-left w-full gap-1">
           <label
             for="signup-username"

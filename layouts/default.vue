@@ -8,7 +8,7 @@ import { isWriteModalOpen } from "#imports";
   <main
     class="mt-[60px] flex flex-col justify-center items-center max-w-[1480px] w-full mx-auto"
   >
-    <div class="mt-12 w-full">
+    <div class="my-12 w-full">
       <slot />
     </div>
     <dialog
