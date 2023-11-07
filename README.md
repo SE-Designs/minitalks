@@ -1,6 +1,11 @@
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Also check the [Prisma docs](https://www.prisma.io/docs)
+
+Set .env file as .env.example and don't forget to add:
+
+"\*\*\*.mongodb.net/%3FauthSource=admin" to accept auth and escape '?' [according to this](https://github.com/prisma/prisma/issues/10287)
 
 ## Setup
 
