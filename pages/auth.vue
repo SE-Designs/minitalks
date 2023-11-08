@@ -16,6 +16,26 @@ const signUpValue = ref({
 });
 
 const auth = ref("sign-in");
+const loading = ref(false);
+
+async function handleSignIn() {
+  const { signIn } = useAuth();
+
+  try {
+    loading.value = true;
+    await signIn({
+      username: signInValue.value.username,
+      password: signInValue.value.password,
+    });
+
+    await navigateTo({ path: "/" });
+  } catch (error) {
+    console.error(`something went wrong: ${error}`);
+    // show notification
+  } finally {
+    loading.value = false;
+  }
+}
 </script>
 <template>
   <section
@@ -76,7 +96,15 @@ const auth = ref("sign-in");
             class="input input-bordered w-full text-white"
           />
         </div>
-        <button class="btn btn-outline btn-primary w-full">Sign in</button>
+        <button
+          class="btn btn-outline btn-primary w-full"
+          @click="handleSignIn"
+        >
+          <span v-if="!loading">Sign In</span>
+          <div v-else class="flex flex-row items-center gap-x-2">
+            <span class="loading loading-spinner"></span> loading
+          </div>
+        </button>
       </div>
       <div
         class="flex flex-col items-center text-neutral bg-neutral-content p-2 rounded-md mt-4 gap-4"
