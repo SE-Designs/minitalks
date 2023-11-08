@@ -28,4 +28,12 @@ function getUserByEmail(email: string) {
   });
 }
 
-export { createUser, getUserByEmail, getUserByUsername };
+function getUserById(userId: string) {
+  return client.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+}
+
+export { createUser, getUserByEmail, getUserByUsername, getUserById };
