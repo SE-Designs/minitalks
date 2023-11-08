@@ -6,4 +6,12 @@ function createRefreshToken(refreshToken: any) {
   });
 }
 
-export { createRefreshToken };
+function getRefreshTokenByToken(token: any) {
+  return prisma.refreshToken.findUnique({
+    where: {
+      token,
+    },
+  });
+}
+
+export { createRefreshToken, getRefreshTokenByToken };
