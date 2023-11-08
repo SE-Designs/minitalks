@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { useAuthUser, initAuth } = useAuth();
+
+initAuth();
+</script>
 <template>
   <NuxtLayout>
     <NuxtPage />
