@@ -3,6 +3,7 @@ const { initAuth } = useAuth();
 
 onBeforeMount(() => {
   initAuth();
+  console.log(`making init auth`);
 });
 </script>
 <template>

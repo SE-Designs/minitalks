@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 export default function () {
   const useAuthToken = () => useState("auth_token");
   const useAuthUser = () => useState("auth_user");
@@ -63,7 +65,7 @@ export default function () {
   async function getUser() {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = (await useProtectedFetch(`/api/auth/refresh`)) as any;
+        const data = (await useProtectedFetch(`/api/auth/user`)) as any;
 
         setUser(data?.user);
 
@@ -76,9 +78,23 @@ export default function () {
     });
   }
 
+  async function refreshAccessToken() {
+    const authToken = useAuthToken();
+
+    if (!authToken.value) return;
+
+    const jwt = jwtDecode(authToken.value as string);
+    const refreshTime = (jwt?.exp as number) - 60000;
+
+    setTimeout(async () => {
+      await refreshToken();
+      refreshAccessToken();
+    }, refreshTime);
+  }
+
   // when just visit app.vue
   async function initAuth() {
-    console.log("loading");
+    console.log("init started - loading");
 
     return new Promise(async (resolve, reject) => {
       try {
@@ -86,6 +102,8 @@ export default function () {
 
         await refreshToken();
         await getUser();
+
+        refreshAccessToken();
 
         resolve(true);
       } catch (error) {
