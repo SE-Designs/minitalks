@@ -1,5 +1,5 @@
-import client from ".";
 import bcrypt from "bcryptjs";
+import client from ".";
 
 function createUser(userData: any) {
   const userFinal = {

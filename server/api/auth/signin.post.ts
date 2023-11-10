@@ -1,11 +1,12 @@
-import { sendError } from "#imports";
-import bcrypt from "bcryptjs";
-import { createRefreshToken } from "~/server/db/refreshToken";
 import { getUserByEmail, getUserByUsername } from "~/server/db/user";
-import { userTransformer } from "~/server/transformers/user";
+
+import bcrypt from "bcryptjs";
 import checkValidEmail from "~/utils/checkValidEmail";
+import { createRefreshToken } from "~/server/db/refreshToken";
 import generateTokens from "~/utils/generateTokens";
+import { sendError } from "#imports";
 import sendRefreshToken from "~/utils/sendRefreshToken";
+import { userTransformer } from "~/server/transformers/user";
 
 export default defineEventHandler(async (event: any) => {
   const body = await readBody(event);

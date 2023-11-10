@@ -1,8 +1,8 @@
-import { sendError } from "#imports";
-import { getRefreshTokenByToken } from "~/server/db/refreshToken";
-import { getUserById } from "~/server/db/user";
 import { decodeRefreshToken } from "~/utils/decodeTokens";
 import generateTokens from "~/utils/generateTokens";
+import { getRefreshTokenByToken } from "~/server/db/refreshToken";
+import { getUserById } from "~/server/db/user";
+import { sendError } from "#imports";
 
 export default defineEventHandler(async (event: any) => {
   const cookies = parseCookies(event);
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event: any) => {
   const refreshToken = cookies;
 
   if (!refreshToken)
-    sendError(
+    return sendError(
       event,
       createError({
         statusCode: 401,
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event: any) => {
   const refToken = await getRefreshTokenByToken(refreshToken);
 
   if (!refToken)
-    sendError(
+    return sendError(
       event,
       createError({
         statusCode: 401,
@@ -41,11 +41,12 @@ export default defineEventHandler(async (event: any) => {
       access_token: accessToken,
     };
   } catch (error) {
-    createError({
-      statusCode: 500,
-      statusMessage: "Something went wrong",
-    });
+    return sendError(
+      event,
+      createError({
+        statusCode: 500,
+        statusMessage: `Something went wrong: ${error}`,
+      })
+    );
   }
-
-  return;
 });

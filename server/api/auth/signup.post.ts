@@ -1,5 +1,5 @@
-import { sendError } from "#imports";
 import { createUser } from "~/server/db/user";
+import { sendError } from "#imports";
 import { userTransformer } from "~/server/transformers/user";
 
 export default defineEventHandler(async (event: any) => {
