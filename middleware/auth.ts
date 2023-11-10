@@ -1,8 +1,7 @@
-// export default defineNuxtRouteMiddleware(async (to, from, next) => {
-//   if (process.server) return;
-//   const { useAuthUser, initAuth } = useAuth();
+export default defineNuxtRouteMiddleware(() => {
+  if (process.server) return;
+  const { useAuthUser } = useAuth();
+  const user = useAuthUser();
 
-//   initAuth()
-
-//   // if (!user.value) return navigateTo("/auth#sign-in");
-// });
+  if (!user.value) return navigateTo("/auth#sign-in");
+});

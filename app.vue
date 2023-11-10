@@ -1,7 +1,9 @@
 <script setup lang="ts">
-const { useAuthUser, initAuth } = useAuth();
+const { initAuth } = useAuth();
 
-initAuth();
+onBeforeMount(() => {
+  initAuth();
+});
 </script>
 <template>
   <NuxtLayout>

@@ -3,7 +3,7 @@ export default function () {
   const useAuthUser = () => useState("auth_user");
   const useAuthLoading = () => useState("auth_loading", () => true);
 
-  function setToken(newToken: string) {
+  function setToken(newToken: any) {
     const authToken = useAuthToken();
     authToken.value = newToken;
   }
@@ -18,7 +18,7 @@ export default function () {
     authLoading.value = state;
   }
 
-  function signIn({ username, password }: any) {
+  async function signIn({ username, password }: any) {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await $fetch(`/api/auth/signin`, {
@@ -42,7 +42,7 @@ export default function () {
   }
 
   // update the tokens
-  function refreshToken() {
+  async function refreshToken() {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await $fetch(`/api/auth/refresh`, {
@@ -60,7 +60,7 @@ export default function () {
     });
   }
 
-  function getUser() {
+  async function getUser() {
     return new Promise(async (resolve, reject) => {
       try {
         const data = (await useProtectedFetch(`/api/auth/refresh`)) as any;
@@ -77,7 +77,7 @@ export default function () {
   }
 
   // when just visit app.vue
-  function initAuth() {
+  async function initAuth() {
     console.log("loading");
 
     return new Promise(async (resolve, reject) => {
