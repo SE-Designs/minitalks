@@ -6,10 +6,10 @@ const { publishMininote } = useMininote();
 const { useAuthLoading, useAuthUser } = await useAuth();
 const user = (useAuthUser() || "") as unknown as ShortUserType;
 const isLoading = useAuthLoading();
-const createLoading = ref(false);
+const loading = ref(false);
 
 async function handleSubmit(data: any) {
-  createLoading.value = true;
+  loading.value = true;
   try {
     const response = publishMininote({
       content: data.content,
@@ -20,7 +20,7 @@ async function handleSubmit(data: any) {
   } catch (error) {
     console.error(`PUBLISH MININOTE ERR: ${error}`);
   } finally {
-    createLoading.value = false;
+    loading.value = false;
   }
 }
 </script>
@@ -43,9 +43,9 @@ async function handleSubmit(data: any) {
           :class="isWriteModalOpen ? 'modal modal-open' : 'modal'"
           @click.self="useWriteModal"
         >
-          <AppWrite @on-submit="handleSubmit" :loading="createLoading" />
+          <AppWrite @on-submit="handleSubmit" :loading="loading" />
           <form method="dialog" class="modal-backdrop">
-            <button>close</button>
+            <button hidden>close</button>
           </form>
         </dialog>
       </section>

@@ -10,15 +10,16 @@ const props = defineProps({
 const content = ref("");
 const fileInput = ref();
 const uploadFile = ref();
+const tempFileName = ref([]) as any;
 
 function handleSelectImage() {
   fileInput.value.click();
 }
 
 function handleUploadImage(event: any) {
-  const file = event.target?.files[0];
+  uploadFile.value = event.target?.files[0];
 
-  uploadFile.value = file;
+  tempFileName.value.push(uploadFile.value.name);
 }
 
 function handleFormPublish() {
@@ -30,9 +31,9 @@ function handleFormPublish() {
 </script>
 <template>
   <div class="flex flex-col">
-    <h3 class="font-bold text-2xl text-center mb-4">start your mininotes</h3>
+    <h3 class="font-bold text-2xl text-center mb-4">mininote {{ loading }}</h3>
     <div class="flex flex-col gap-y-2">
-      <label class="font-black text-sm" for="note">mininote:</label>
+      <label class="font-black text-sm" for="note">start writing:</label>
       <textarea
         id="note"
         class="textarea textarea-bordered h-32 max-h-40"
@@ -61,12 +62,18 @@ function handleFormPublish() {
           </button>
           <button
             class="btn btn-primary btn-sm"
-            :disabled="content.length > 0 ? false : true"
+            :disabled="content.length > 0 ? false : true || props.loading"
             @click="handleFormPublish"
           >
-            Publish
+            <span v-if="!props.loading">Publish</span>
+            <div v-else class="flex flex-row items-center gap-x-2">
+              <span class="loading loading-spinner"></span> loading
+            </div>
           </button>
         </div>
+      </div>
+      <div class="flex flex-col">
+        <p v-for="file in tempFileName" :key="file">{{ file }}</p>
       </div>
     </div>
   </div>
