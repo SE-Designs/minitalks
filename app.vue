@@ -6,12 +6,10 @@ onBeforeMount(() => {
 });
 </script>
 <template>
-  <ClientOnly>
-    <NuxtLayout v-if="!isLoading">
-      <NuxtPage />
-    </NuxtLayout>
-    <LayoutLoading v-else />
-  </ClientOnly>
+  <NuxtLayout v-if="!isLoading">
+    <NuxtPage />
+  </NuxtLayout>
+  <LayoutLoading v-else />
 </template>
 <style>
 html {
