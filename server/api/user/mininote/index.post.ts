@@ -19,9 +19,12 @@ export default defineEventHandler(async (event: any) => {
 
   const { fields, files }: any = response;
 
+  const replyTo = fields.replyTo;
+
   const mininoteData = {
     authorId: user.id,
     content: fields.content[0],
+    replyTo: replyTo || null,
   };
 
   const mininote = await createMininote(mininoteData);
