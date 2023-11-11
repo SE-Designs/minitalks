@@ -6,7 +6,7 @@ function createRefreshToken(refreshToken: any) {
   });
 }
 
-function getRefreshTokenByToken(token: any) {
+function getRefreshTokenByToken(token: string) {
   return prisma.refreshToken.findUnique({
     where: {
       token,
@@ -14,4 +14,12 @@ function getRefreshTokenByToken(token: any) {
   });
 }
 
-export { createRefreshToken, getRefreshTokenByToken };
+function removeRefreshToken(token: string) {
+  return prisma.refreshToken.delete({
+    where: {
+      token: token,
+    },
+  });
+}
+
+export { createRefreshToken, getRefreshTokenByToken, removeRefreshToken };
