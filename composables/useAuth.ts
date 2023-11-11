@@ -137,11 +137,30 @@ export default async function () {
     });
   }
 
+  async function signOut() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await useProtectedFetch(`/api/auth/logout`, {
+          method: "POST",
+        });
+
+        setToken(null);
+        setUser(null);
+        resolve(true);
+      } catch (error) {
+        console.error(`SIGN OUT ERR: ${error}`);
+
+        reject(error);
+      }
+    });
+  }
+
   return {
     useAuthToken,
     useAuthUser,
     useAuthLoading,
     signIn,
     initAuth,
+    signOut,
   };
 }
