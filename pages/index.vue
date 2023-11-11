@@ -6,7 +6,24 @@ definePageMeta({
 });
 
 const { useAuthUser } = await useAuth();
+const { getHomeMininotes } = useMininotes();
 const user = (useAuthUser() || "") as unknown as ShortUserType;
+
+const homeMininotes = ref([]) as any;
+const loading = ref(false);
+
+onBeforeMount(async () => {
+  loading.value = true;
+  try {
+    const { mininotes }: any = await getHomeMininotes();
+
+    homeMininotes.value = mininotes;
+  } catch (error) {
+    console.error(`GET HOME MININOTE ERR: ${error}`);
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 <template>
   <div class="flex flex-col gap-8 w-full px-4">
@@ -25,7 +42,17 @@ const user = (useAuthUser() || "") as unknown as ShortUserType;
       class="flex flex-row justify-between w-full gap-x-4 xl:gap-x-8 xl:px-8"
     >
       <AppLeftAside />
-      <AppMainSection />
+      <div class="flex flex-col gap-y-8 flex-1">
+        <AppFilter />
+        <p v-if="homeMininotes">{{ homeMininotes }}</p>
+        <AppMainFallback v-if="loading" />
+        <AppMainSection
+          v-else-if="homeMininotes.length > 0"
+          :posts="homeMininotes"
+        />
+        <AppMainNotFound v-else-if="homeMininotes.length === 0" />
+        <AppMainError v-else />
+      </div>
       <AppRightAside />
     </div>
   </div>
