@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "clean",
+  middleware: ["auth"],
 });
 
 const signInValue = ref({
@@ -19,7 +20,7 @@ const auth = ref("sign-in");
 const loading = ref(false);
 
 async function handleSignIn() {
-  const { signIn } = useAuth();
+  const { signIn } = await useAuth();
 
   try {
     loading.value = true;
@@ -39,7 +40,7 @@ async function handleSignIn() {
 </script>
 <template>
   <section
-    class="flex flex-row flex-wrap-reverse justify-between items-center gap-12 min-h-screen p-8"
+    class="flex flex-row flex-wrap-reverse justify-center items-center gap-x-12 gap-y-4 min-h-screen p-8"
   >
     <div
       class="flex flex-col p-4 bg-neutral rounded-lg flex-1 min-w-[320px] w-full max-w-[520px] mx-auto"
@@ -180,7 +181,7 @@ async function handleSignIn() {
         <button class="btn btn-outline btn-primary w-full">Sign Up</button>
       </div>
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col mx-auto">
       <h1 class="text-5xl font-black mb-8">
         <span v-if="auth === 'sign-in'">Hello, </span>
         <span v-else>Welcome, </span>
