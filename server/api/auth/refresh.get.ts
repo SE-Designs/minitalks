@@ -1,3 +1,5 @@
+import { DecodedTokenType, TokenType } from "~/types/types";
+
 import { decodeRefreshToken } from "~/utils/decodeTokens";
 import generateTokens from "~/utils/generateTokens";
 import { getRefreshTokenByToken } from "~/server/db/refreshToken";
@@ -6,7 +8,6 @@ import { sendError } from "#imports";
 
 export default defineEventHandler(async (event: any) => {
   const cookies = parseCookies(event);
-  console.log(cookies);
 
   const refreshToken = cookies.refresh_token;
 
@@ -19,9 +20,11 @@ export default defineEventHandler(async (event: any) => {
       })
     );
 
-  const refToken = await getRefreshTokenByToken(refreshToken);
+  console.log(`> useAuth: refresh.get.ts - refreshToken: ${refreshToken}`);
 
-  if (!refToken)
+  const refToken = (await getRefreshTokenByToken(refreshToken)) as TokenType;
+
+  if (!refToken?.token)
     return sendError(
       event,
       createError({
@@ -30,12 +33,20 @@ export default defineEventHandler(async (event: any) => {
       })
     );
 
-  const token = decodeRefreshToken(refreshToken);
+  console.log(`> useAuth: refresh.get.ts - refToken: ${refToken?.token}`);
+
+  const token = decodeRefreshToken(refToken.token) as DecodedTokenType;
+
+  console.log(`> useAuth: refresh.get.ts - token: ${token.userId}`);
 
   try {
-    const user = await getUserById(token?.userId || null);
+    const user = await getUserById(token.userId);
+
+    console.log(`> useAuth: refresh.get.ts - user: ${user?.username}`);
 
     const { accessToken } = generateTokens(user);
+
+    console.log(`> useAuth: refresh.get.ts - accessToken: ${accessToken}`);
 
     return {
       access_token: accessToken,
