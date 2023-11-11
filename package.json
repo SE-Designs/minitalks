@@ -29,6 +29,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.0",
     "formidable": "^3.5.1",
+    "human-time": "^0.0.2",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "mongodb": "^6.2.0",
