@@ -6,9 +6,13 @@ import { getUserById } from "../db/user";
 export default defineEventHandler(async (event) => {
   const endpoints = [
     "/api/auth/user",
+    "/api/auth/user/",
     "/api/user/mininote",
+    "/api/user/mininote/",
     "/api/mininotes",
+    "/api/mininotes/",
     "/api/mininotes/:id",
+    "/api/mininotes/:id/",
   ];
 
   const isHandledByThisMiddleware = endpoints.some((endopoint) => {
