@@ -24,6 +24,7 @@ model User {
 
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
+  
   refreshToken RefreshToken[]
   mininote     mininote[]
 }
@@ -51,6 +52,7 @@ model mininote {
 
   likedIds  String[]   @db.ObjectId
   viewedIds String[]   @db.ObjectId
+
   replyToId String?    @db.ObjectId
   replyTo   mininote?  @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   replies   mininote[] @relation("replies")
