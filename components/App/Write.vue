@@ -1,5 +1,32 @@
 <script setup lang="ts">
-const mininote = ref("");
+const emit = defineEmits(["onSubmit"]);
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+const content = ref("");
+const fileInput = ref();
+const uploadFile = ref();
+
+function handleSelectImage() {
+  fileInput.value.click();
+}
+
+function handleUploadImage(event: any) {
+  const file = event.target?.files[0];
+
+  uploadFile.value = file;
+}
+
+function handleFormPublish() {
+  emit("onSubmit", {
+    content: content.value,
+    media: uploadFile ? [uploadFile.value] : [],
+  });
+}
 </script>
 <template>
   <div class="flex flex-col">
@@ -10,23 +37,36 @@ const mininote = ref("");
         id="note"
         class="textarea textarea-bordered h-32 max-h-40"
         maxlength="80"
-        v-model.value="mininote"
+        v-model.value="content"
         placeholder="What's in your mind?"
       ></textarea>
       <div class="flex flex-row justify-between items-center gap-x-8">
         <p class="text-sm">one post per 24 hours</p>
         <p class="text-sm">
-          {{ mininote.length > 0 ? mininote.length : "max. characters - 80" }}
+          {{ content.length > 0 ? content.length : "max. characters - 80" }}
         </p>
       </div>
-      <div class="flex justify-between items-center mt-2">
+      <div class="flex justify-between items-center gap-x-24 mt-2">
         <p class="text-xs">include some hashtags</p>
-        <button
-          class="btn btn-sm"
-          :class="mininote.length > 0 ? 'btn-primary' : 'btn-neutral'"
-        >
-          Publish
-        </button>
+        <div class="flex flex-row items-center gap-x-2">
+          <button class="btn btn-secondary btn-sm" @click="handleSelectImage">
+            <Icon name="pixelarticons:image" />
+            <input
+              ref="fileInput"
+              type="file"
+              accept="video/*,image/*"
+              hidden
+              @change="handleUploadImage"
+            />
+          </button>
+          <button
+            class="btn btn-primary btn-sm"
+            :disabled="content.length > 0 ? false : true"
+            @click="handleFormPublish"
+          >
+            Publish
+          </button>
+        </div>
       </div>
     </div>
   </div>
