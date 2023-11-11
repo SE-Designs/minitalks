@@ -1,27 +1,19 @@
-import { getUserById } from "~/server/db/user";
+export default defineNuxtRouteMiddleware(async (event) => {
+  if (process.server) return;
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  // if (process.server) return;
-  const event = useRequestHeaders();
-  console.log(event);
-  // const { useAuthUser } = useAuth();
-  // const user = useAuthUser();
+  const { useAuthUser, useAuthLoading } = await useAuth();
+  const loading = useAuthLoading();
+  const user = useAuthUser();
 
-  // if (!user.value) return navigateTo("/auth#sign-in");
-  // const token = event?.req.headers.authorization?.split(" ")[1];
-  // console.log(token);
+  watch(loading, () => {
+    console.log(`auth middleware says: ${user.value} ${!event.path}`);
 
-  // const decoded = decodeAccessToken(token);
-  // console.log(decoded);
-  // if (!decoded) return navigateTo("/auth#sign-in");
-
-  // try {
-  //   const userId = decoded.userId;
-  //   const user = await getUserById(userId);
-
-  //   event.context.auth = user;
-  // } catch (error) {
-  //   console.error(`middleware: auth error: ${error}`);
-  //   return navigateTo("/auth#sign-in");
-  // }
+    if (!event.path.startsWith(`/auth`, 0) && !user.value) {
+      console.log("auth middleware redirect to /auth");
+      return navigateTo(`/auth`);
+    } else if (event.path.startsWith(`/auth`, 0) && user.value) {
+      console.log("auth middleware redirect to /");
+      return navigateTo(`/`);
+    }
+  });
 });
