@@ -51,7 +51,7 @@ const props = defineProps({
           </div>
         </div>
         <div class="hidden flex-row items-center gap-2 sm:flex">
-          <p class="text-xs font-bold">14 mins ago</p>
+          <p class="text-xs font-bold">{{ props.post.time }}</p>
           <button
             class="w-[28px] h-[28px] min-w-[28px] min-h-[28px] p-[4px] flex justify-center items-center bg-neutral rounded-full"
           >
