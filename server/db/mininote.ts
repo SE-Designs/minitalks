@@ -6,4 +6,10 @@ async function createMininote(mininoteData: any) {
   });
 }
 
-export { createMininote };
+async function getMininotes(params: any = {}) {
+  return prisma.mininote.findMany({
+    ...params,
+  });
+}
+
+export { createMininote, getMininotes };
