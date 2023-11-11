@@ -1,21 +1,17 @@
 <script setup lang="ts">
-const user = {
-  username: "DDDance",
-  avatar: "",
-  content: `Lorem ipsum dolor
-sit amet consectetur, adipisicing elit. 
-
-#typescript #javascript`,
-  reply: "mixturegg",
-  theme: "warning",
-};
+const props = defineProps({
+  post: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
 <template>
   <article class="flex flex-col gap-y-4 items-center sm:flex-row">
     <div
       class="ml-auto mr-0 w-fit flex flex-row items-center gap-x-2 sm:hidden"
     >
-      <p class="text-xs font-bold">14 mins ago</p>
+      <p class="text-xs font-bold">{{ props.post.time }}</p>
       <button
         class="w-[32px] h-[32px] min-w-[32px] min-h-[32px] flex justify-center items-center rounded-full bg-base-100"
       >
@@ -43,14 +39,14 @@ sit amet consectetur, adipisicing elit.
               to="/"
               class="w-fit font-black link link-hover hover:text-warning"
             >
-              {{ user.username }}
+              {{ props.post.author.username }}
             </NuxtLink>
             <NuxtLink
               to="/"
               class="w-fit text-sm font-bold link link-hover hover:opacity-100 opacity-60"
-              v-if="user.reply"
+              v-if="props.post.replyToId"
             >
-              replying to {{ user.reply }}
+              replying to {{ props.post.replyTo.username }}
             </NuxtLink>
           </div>
         </div>
@@ -64,7 +60,7 @@ sit amet consectetur, adipisicing elit.
         </div>
       </div>
       <div class="h-px w-full bg-neutral"></div>
-      <pre class="font-sans">{{ user.content }}</pre>
+      <pre class="font-sans">{{ props.post.content }}</pre>
     </div>
     <aside
       class="flex flex-row justify-between gap-y-2 gap-x-6 items-center sm:ml-6 sm:justify-center sm:flex-col"
@@ -77,7 +73,9 @@ sit amet consectetur, adipisicing elit.
         >
           <Icon name="pixelarticons:arrow-up" />
         </div>
-        <p class="text-sm font-semibold">14</p>
+        <p class="text-sm font-semibold">
+          {{ props.post.likedNumber }}
+        </p>
       </button>
       <button
         class="flex flex-row items-center text-center gap-2 w-full cursor-pointer sm:flex-col sm:gap-1"
@@ -87,7 +85,9 @@ sit amet consectetur, adipisicing elit.
         >
           <Icon name="pixelarticons:visible" />
         </div>
-        <p class="text-sm font-semibold">129</p>
+        <p class="text-sm font-semibold">
+          {{ props.post.viewedNumber }}
+        </p>
       </button>
       <button
         class="flex flex-row items-center text-center gap-2 w-full cursor-pointer sm:flex-col sm:gap-1"
@@ -97,7 +97,9 @@ sit amet consectetur, adipisicing elit.
         >
           <Icon name="pixelarticons:message-arrow-right" />
         </div>
-        <p class="text-sm font-semibold">3</p>
+        <p class="text-sm font-semibold">
+          {{ props.post.repliesNumber }}
+        </p>
       </button>
     </aside>
   </article>
