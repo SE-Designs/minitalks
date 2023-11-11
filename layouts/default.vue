@@ -2,9 +2,27 @@
 import { isWriteModalOpen } from "#imports";
 import type { ShortUserType } from "~/types/types";
 
+const { publishMininote } = useMininote();
 const { useAuthLoading, useAuthUser } = await useAuth();
 const user = (useAuthUser() || "") as unknown as ShortUserType;
 const isLoading = useAuthLoading();
+const createLoading = ref(false);
+
+async function handleSubmit(data: any) {
+  createLoading.value = true;
+  try {
+    const response = publishMininote({
+      content: data.content,
+      media: data.media,
+    });
+
+    console.log(response);
+  } catch (error) {
+    console.error(`PUBLISH MININOTE ERR: ${error}`);
+  } finally {
+    createLoading.value = false;
+  }
+}
 </script>
 <template>
   <ClientOnly>
@@ -25,7 +43,7 @@ const isLoading = useAuthLoading();
           :class="isWriteModalOpen ? 'modal modal-open' : 'modal'"
           @click.self="useWriteModal"
         >
-          <AppWrite />
+          <AppWrite @on-submit="handleSubmit" :loading="createLoading" />
           <form method="dialog" class="modal-backdrop">
             <button>close</button>
           </form>
