@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-export default function () {
+export default async function () {
   const useAuthToken = () => useState("auth_token");
   const useAuthUser = () => useState("auth_user");
   const useAuthLoading = () => useState("auth_loading", () => true);
@@ -8,11 +8,15 @@ export default function () {
   function setToken(newToken: any) {
     const authToken = useAuthToken();
     authToken.value = newToken;
+
+    console.log(`setting token to: ${newToken}`);
   }
 
-  function setUser(newUser: string) {
+  function setUser(newUser: any) {
     const authUser = useAuthUser();
     authUser.value = newUser;
+
+    console.log(`setting user to: ${newUser}`);
   }
 
   function setAuthLoading(state: boolean) {
@@ -34,9 +38,15 @@ export default function () {
         setToken(data.access_token);
         setUser(data.user);
 
+        console.log(
+          `> useAuth: signIn - data: ${
+            data.user && data.access_token ? "OK" : "NOT"
+          }`
+        );
+
         resolve(true);
       } catch (error) {
-        console.error(`Some errors, when auth: ${error}`);
+        console.error(`SIGN IN ERR: ${error}`);
 
         reject(error);
       }
@@ -53,9 +63,13 @@ export default function () {
 
         setToken(data?.access_token);
 
+        console.log(
+          `> useAuth: access_token - data: ${data.access_token ? "OK" : "NOT"}`
+        );
+
         resolve(true);
       } catch (error) {
-        console.error(`Some errors, when auth: ${error}`);
+        console.error(`UPDATE REFRESH TOKEN ERR: ${error}`);
 
         reject(error);
       }
@@ -67,11 +81,13 @@ export default function () {
       try {
         const data = (await useProtectedFetch(`/api/auth/user`)) as any;
 
-        setUser(data?.user);
+        setUser(data.user);
+
+        console.log(`> useAuth: getUser - user: ${data.user?.username}`);
 
         resolve(true);
       } catch (error) {
-        console.error(`Some errors, when auth: ${error}`);
+        console.error(`GET USER ERR: ${error}`);
 
         reject(error);
       }
@@ -85,6 +101,9 @@ export default function () {
 
     const jwt = jwtDecode(authToken.value as string);
     const refreshTime = (jwt?.exp as number) - 60000;
+
+    console.log(`> useAuth: refreshAccessToken - data: ${jwt ? "OK" : "NOT"}`);
+    console.log(`> useAuth: refreshAccessToken - refresh: ${refreshTime}`);
 
     setTimeout(async () => {
       await refreshToken();
@@ -105,9 +124,11 @@ export default function () {
 
         refreshAccessToken();
 
+        console.log(`> useAuth: initAuth - data: OK`);
+
         resolve(true);
       } catch (error) {
-        console.error(`Some errors, when auth: ${error}`);
+        console.error(`INIT AUTH ERR: ${error}`);
 
         reject(error);
       } finally {
@@ -116,5 +137,11 @@ export default function () {
     });
   }
 
-  return { useAuthToken, useAuthUser, useAuthLoading, signIn, initAuth };
+  return {
+    useAuthToken,
+    useAuthUser,
+    useAuthLoading,
+    signIn,
+    initAuth,
+  };
 }
