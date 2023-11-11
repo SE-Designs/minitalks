@@ -1,15 +1,17 @@
 <script setup lang="ts">
-const { initAuth } = useAuth();
-
+const { initAuth, useAuthLoading } = await useAuth();
+const isLoading = useAuthLoading();
 onBeforeMount(() => {
   initAuth();
-  console.log(`making init auth`);
 });
 </script>
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <ClientOnly>
+    <NuxtLayout v-if="!isLoading">
+      <NuxtPage />
+    </NuxtLayout>
+    <LayoutLoading v-else />
+  </ClientOnly>
 </template>
 <style>
 html {
