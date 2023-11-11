@@ -13,6 +13,8 @@ export default defineEventHandler(async (event: any) => {
 
   const { username, password } = body;
 
+  console.log(`> sign-in post - username, password: ${username} ${password}`);
+
   if (!username || !password) {
     return sendError(
       event,
@@ -47,6 +49,8 @@ export default defineEventHandler(async (event: any) => {
   // compare passwords:
   const isCorrectPassword = await bcrypt.compare(password, user.password);
 
+  console.log(`> sign-in post - isCorrectPassword: ${isCorrectPassword}`);
+
   if (!isCorrectPassword) {
     return sendError(
       event,
@@ -59,6 +63,10 @@ export default defineEventHandler(async (event: any) => {
 
   // generate tokens:
   const { accessToken, refreshToken } = generateTokens(user);
+
+  console.log(
+    `> sign-in post - accessToken, refreshToken: ${accessToken}, ${refreshToken}`
+  );
 
   // save refresh token inside prisma:
   await createRefreshToken({
