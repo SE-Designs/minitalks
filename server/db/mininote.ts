@@ -12,4 +12,14 @@ async function getMininotes(params: any = {}) {
   });
 }
 
-export { createMininote, getMininotes };
+async function getMininoteById(mininoteId: string, params: any = {}) {
+  return prisma.mininote.findUnique({
+    ...params,
+    where: {
+      ...params.where,
+      id: mininoteId,
+    },
+  });
+}
+
+export { createMininote, getMininotes, getMininoteById };
