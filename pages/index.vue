@@ -44,7 +44,6 @@ onBeforeMount(async () => {
       <AppLeftAside />
       <div class="flex flex-col gap-y-8 flex-1">
         <AppFilter />
-        <p v-if="homeMininotes">{{ homeMininotes }}</p>
         <AppMainFallback v-if="loading" />
         <AppMainSection
           v-else-if="homeMininotes.length > 0"
