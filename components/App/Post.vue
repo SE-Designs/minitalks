@@ -246,6 +246,14 @@ const author = props.post.author;
       </button>
     </aside>
   </article>
+  <NuxtLink
+    v-if="mininote.repliesNumber > 0"
+    :to="`/mininote/${mininote.id}`"
+    class="btn w-full hover:btn-warning sm:w-[calc(100%-64px)]"
+  >
+    <Icon name="pixelarticons:arrow-right" />
+    <span>SEE COMMENTS ({{ mininote.repliesNumber }})</span>
+  </NuxtLink>
 </template>
 <style scoped>
 pre {
