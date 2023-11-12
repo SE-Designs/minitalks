@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import type { ShortUserType } from "~/types/types";
 import { isImage, isVideo } from "~/utils/checkMediaFile";
+
+const { useAuthUser } = await useAuth();
+const user = (useAuthUser() || "") as unknown as ShortUserType;
 
 const props = defineProps({
   post: {
@@ -17,14 +21,70 @@ const author = props.post.author;
       class="ml-auto mr-0 w-fit flex flex-row items-center gap-x-2 sm:hidden"
     >
       <p class="text-xs font-bold">{{ mininote.time }}</p>
-      <button
-        class="w-[32px] h-[32px] min-w-[32px] min-h-[32px] flex justify-center items-center rounded-full bg-base-100"
+      <div
+        class="dropdown dropdown-bottom dropdown-end"
+        v-if="user.username === author.username"
       >
-        <Icon name="pixelarticons:more-vertical" />
-      </button>
+        <label
+          tabindex="0"
+          class="flex justify-center items-center cursor-pointer"
+        >
+          <button
+            class="w-[32px] h-[32px] min-w-[32px] min-h-[32px] flex justify-center items-center rounded-full bg-base-100"
+          >
+            <Icon name="pixelarticons:more-vertical" />
+          </button>
+        </label>
+        <ul
+          tabindex="0"
+          class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
+        >
+          <li>
+            <p class="w-full flex flex-row gap-x-4 items-center">
+              <Icon name="pixelarticons:edit" />
+              <span>Edit</span>
+            </p>
+          </li>
+          <li>
+            <p class="w-full flex flex-row gap-x-4 items-center">
+              <Icon name="pixelarticons:trash" />
+              <span>Delete</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown dropdown-bottom dropdown-end" v-else>
+        <label
+          tabindex="0"
+          class="flex justify-center items-center cursor-pointer"
+        >
+          <button
+            class="w-[32px] h-[32px] min-w-[32px] min-h-[32px] flex justify-center items-center rounded-full bg-base-100"
+          >
+            <Icon name="pixelarticons:more-vertical" />
+          </button>
+        </label>
+        <ul
+          tabindex="0"
+          class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
+        >
+          <li>
+            <p class="w-full flex flex-row gap-x-4 items-center">
+              <Icon name="pixelarticons:downasaur" />
+              <span>Author</span>
+            </p>
+          </li>
+          <li>
+            <p class="w-full flex flex-row gap-x-4 items-center">
+              <Icon name="pixelarticons:flag" />
+              <span>Report</span>
+            </p>
+          </li>
+        </ul>
+      </div>
     </div>
     <div
-      class="flex flex-col gap-4 w-full bg-base-100 rounded-lg p-4 border border-transparent"
+      class="flex flex-col gap-4 w-full bg-base-100 rounded-lg p-4 border border-transparent cursor-pointer transition-colors hover:border-warning"
     >
       <div class="flex flex-row justify-between items-center gap-4">
         <!-- avatar img or downsaur icon -->
@@ -54,21 +114,77 @@ const author = props.post.author;
               {{ author.username }}
             </NuxtLink>
             <NuxtLink
-              to="/"
+              :to="`/mininotes/${mininote.replyTo.id}`"
               class="w-fit text-sm font-bold link link-hover hover:opacity-100 opacity-60"
-              v-if="mininote.replyToId"
+              v-if="mininote.replyTo"
             >
-              replying to {{ mininote.replyTo.username }}
+              replying to {{ mininote.replyTo.author.username }}
             </NuxtLink>
           </div>
         </div>
         <div class="hidden flex-row items-center gap-2 sm:flex">
           <p class="text-xs font-bold">{{ mininote.time }}</p>
-          <button
-            class="w-[28px] h-[28px] min-w-[28px] min-h-[28px] p-[4px] flex justify-center items-center bg-neutral rounded-full"
+          <div
+            class="dropdown dropdown-bottom dropdown-end"
+            v-if="user.username === author.username"
           >
-            <Icon name="pixelarticons:more-vertical" />
-          </button>
+            <label
+              tabindex="0"
+              class="flex justify-center items-center cursor-pointer"
+            >
+              <button
+                class="w-[28px] h-[28px] min-w-[28px] min-h-[28px] p-[4px] flex justify-center items-center bg-neutral rounded-full"
+              >
+                <Icon name="pixelarticons:more-vertical" />
+              </button>
+            </label>
+            <ul
+              tabindex="0"
+              class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
+            >
+              <li>
+                <p class="w-full flex flex-row gap-x-4 items-center">
+                  <Icon name="pixelarticons:edit" />
+                  <span>Edit</span>
+                </p>
+              </li>
+              <li>
+                <p class="w-full flex flex-row gap-x-4 items-center">
+                  <Icon name="pixelarticons:trash" />
+                  <span>Delete</span>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown dropdown-bottom dropdown-end" v-else>
+            <label
+              tabindex="0"
+              class="flex justify-center items-center cursor-pointer"
+            >
+              <button
+                class="w-[28px] h-[28px] min-w-[28px] min-h-[28px] p-[4px] flex justify-center items-center bg-neutral rounded-full"
+              >
+                <Icon name="pixelarticons:more-vertical" />
+              </button>
+            </label>
+            <ul
+              tabindex="0"
+              class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
+            >
+              <li>
+                <p class="w-full flex flex-row gap-x-4 items-center">
+                  <Icon name="pixelarticons:downasaur" />
+                  <span>Author</span>
+                </p>
+              </li>
+              <li>
+                <p class="w-full flex flex-row gap-x-4 items-center">
+                  <Icon name="pixelarticons:flag" />
+                  <span>Report</span>
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="h-px w-full bg-neutral"></div>
@@ -120,6 +236,7 @@ const author = props.post.author;
       >
         <div
           class="w-[40px] h-[40px] min-w-[40px] min-h-[40px] flex justify-center items-center rounded-full bg-base-100 hover:bg-info hover:text-info-content"
+          @click="useWriteModal({ id: mininote.id, username: author.username })"
         >
           <Icon name="pixelarticons:message-arrow-right" />
         </div>
@@ -132,6 +249,8 @@ const author = props.post.author;
 </template>
 <style scoped>
 pre {
+  text-align: left;
+
   white-space: break-spaces;
   overflow: hidden;
   text-overflow: ellipsis;
