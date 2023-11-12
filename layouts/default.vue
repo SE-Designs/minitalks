@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isWriteModalOpen } from "#imports";
+import { isWriteModal } from "#imports";
 import type { ShortUserType } from "~/types/types";
 
 const { publishMininote } = useMininotes();
@@ -14,6 +14,7 @@ async function handleSubmit(data: any) {
     const response = await publishMininote({
       content: data.content,
       media: data.media,
+      replyTo: data.replyTo,
     });
 
     console.log(response);
@@ -38,8 +39,8 @@ async function handleSubmit(data: any) {
       <dialog
         id="write"
         class="flex justify-center items-center"
-        :class="isWriteModalOpen ? 'modal modal-open' : 'modal'"
-        @click.self="useWriteModal"
+        :class="isWriteModal ? 'modal modal-open' : 'modal'"
+        @click.self="useWriteModal({})"
       >
         <AppWrite @on-submit="handleSubmit" :loading="loading" />
         <form method="dialog" class="modal-backdrop">

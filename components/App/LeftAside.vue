@@ -25,7 +25,7 @@
     <div
       to="/"
       class="flex flex-row gap-x-2 items-center btn btn-primary"
-      @click="useWriteModal"
+      @click="useWriteModal({})"
     >
       <Icon name="pixelarticons:edit" />
       <span class="hidden xl:inline">Write</span>

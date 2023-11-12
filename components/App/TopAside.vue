@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { useWriteModal } from "#imports";
-</script>
+<script setup lang="ts"></script>
 <template>
   <aside
     class="flex flex-col gap-4 justify-center items-center w-full md:hidden"
@@ -184,7 +182,7 @@ import { useWriteModal } from "#imports";
       <NuxtLink to="/" class="btn btn-ghost">
         <Icon name="pixelarticons:user" class="block xl:hidden" />
       </NuxtLink>
-      <div class="btn btn-ghost" @click="useWriteModal">
+      <div class="btn btn-ghost" @click="useWriteModal({})">
         <Icon name="pixelarticons:edit" />
       </div>
       <NuxtLink to="/" class="btn btn-ghost">
