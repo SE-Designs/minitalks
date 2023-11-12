@@ -34,7 +34,30 @@ async function handleSubmit(data: any) {
       class="mt-[60px] flex flex-col justify-center items-center max-w-[1480px] w-full mx-auto"
     >
       <div class="my-12 w-full">
-        <slot />
+        <div class="flex flex-col gap-8 w-full px-4">
+          <div class="flex flex-col gap-2 text-center">
+            <h2 class="font-bold text-3xl">
+              its <span class="text-gradient">minitalks</span>
+            </h2>
+            <p class="text-xs">
+              How are you {{ user?.username }}?
+              <span
+                class="link link-accent italic cursor-pointer"
+                @click="useWriteModal({})"
+                >start writing</span
+              >
+            </p>
+          </div>
+
+          <AppTopAside />
+          <div
+            class="flex flex-row justify-between w-full gap-x-4 xl:gap-x-8 xl:px-8"
+          >
+            <AppLeftAside />
+            <slot />
+            <AppRightAside />
+          </div>
+        </div>
       </div>
       <dialog
         id="write"

@@ -43,9 +43,9 @@ const isNew = computed(() => {
 <template>
   <div class="flex flex-col">
     <h3 class="font-bold text-2xl text-center mb-4">{{ isNew }} mininote</h3>
-    <h6 class="mt-2" v-if="isNew === 'reply'">
+    <NuxtLink v-if="isNew === 'reply'" class="mt-2" :to="`/`">
       replying to {{ isWriteReply.username }}
-    </h6>
+    </NuxtLink>
     <div class="flex flex-col gap-y-2">
       <label class="font-black text-sm" for="note">start writing:</label>
       <textarea
