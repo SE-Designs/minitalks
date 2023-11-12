@@ -19,13 +19,16 @@ export default defineEventHandler(async (event: any) => {
 
   const { fields, files }: any = response;
 
-  const replyTo = fields.replyTo;
-
   const mininoteData = {
     authorId: user.id,
     content: fields.content[0],
-    replyTo: replyTo || null,
-  };
+  } as any;
+
+  const replyTo = fields.replyTo;
+
+  if (replyTo && replyTo !== "null" && replyTo !== "undefined") {
+    mininoteData.replyToId = replyTo;
+  }
 
   const mininote = await createMininote(mininoteData);
 
