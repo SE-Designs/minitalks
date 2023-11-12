@@ -44,4 +44,7 @@ export type PublicUserType = Pick<
   "id" | "email" | "username" | "avatar" | "following" | "mininote"
 >;
 
-export type ShortUserType = Pick<UserType, "id" | "email" | "username">;
+export type ShortUserType = Pick<
+  UserType,
+  "id" | "email" | "username" | "avatar"
+>;

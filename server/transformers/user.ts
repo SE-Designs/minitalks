@@ -6,6 +6,7 @@ function userTransformer(user: ShortUserType) {
     id: user.id,
     email: user.email,
     username: user.username,
+    avatar: user.avatar,
   };
 }
 
