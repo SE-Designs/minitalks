@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isWriteReply } from "#imports";
 const emit = defineEmits(["onSubmit"]);
 const props = defineProps({
   loading: {
@@ -9,7 +10,7 @@ const props = defineProps({
 
 const content = ref("");
 const fileInput = ref();
-const uploadFile = ref();
+const uploadFile = ref() as any;
 const tempFileName = ref([]) as any;
 
 function handleSelectImage() {
@@ -23,15 +24,28 @@ function handleUploadImage(event: any) {
 }
 
 function handleFormPublish() {
+  // console.log({
+  //   content: content.value,
+  //   media: uploadFile && uploadFile[0] !== undefined ? [uploadFile.value] : [],
+  //   replyTo: isWriteReply.value.id,
+  // });
   emit("onSubmit", {
     content: content.value,
-    media: uploadFile ? [uploadFile.value] : [],
+    media: uploadFile && uploadFile[0] !== undefined ? [uploadFile.value] : [],
+    replyTo: isWriteReply.value.id,
   });
 }
+
+const isNew = computed(() => {
+  return JSON.stringify(isWriteReply.value) === "{}" ? "new" : "reply";
+});
 </script>
 <template>
   <div class="flex flex-col">
-    <h3 class="font-bold text-2xl text-center mb-4">mininote</h3>
+    <h3 class="font-bold text-2xl text-center mb-4">{{ isNew }} mininote</h3>
+    <h6 class="mt-2" v-if="isNew === 'reply'">
+      replying to {{ isWriteReply.username }}
+    </h6>
     <div class="flex flex-col gap-y-2">
       <label class="font-black text-sm" for="note">start writing:</label>
       <textarea
