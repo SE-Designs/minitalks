@@ -3,6 +3,8 @@ export default function () {
     const form = new FormData();
 
     form.append("content", formData.content);
+    form.append("replyTo", formData.replyTo);
+
     formData.media.forEach((file: any, index: number) => {
       form.append("media_file_" + index, file);
     });
@@ -24,6 +26,25 @@ export default function () {
 
         resolve(response);
       } catch (error) {
+        console.error(`MININOTES GET ERR: ${error}`);
+
+        reject(error);
+      }
+    });
+  }
+
+  async function getMininoteById(mininoteId: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await useProtectedFetch(
+          `/api/mininotes/${mininoteId}`,
+          {
+            method: "GET",
+          }
+        );
+
+        resolve(response);
+      } catch (error) {
         console.error(`MININOTE GET ERR: ${error}`);
 
         reject(error);
@@ -31,5 +52,5 @@ export default function () {
     });
   }
 
-  return { publishMininote, getHomeMininotes };
+  return { publishMininote, getHomeMininotes, getMininoteById };
 }
