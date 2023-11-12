@@ -24,7 +24,7 @@ export default defineEventHandler(async (event: any) => {
     content: fields.content[0],
   } as any;
 
-  const replyTo = fields.replyTo;
+  const replyTo = fields.replyTo[0];
 
   if (replyTo && replyTo !== "null" && replyTo !== "undefined") {
     mininoteData.replyToId = replyTo;
