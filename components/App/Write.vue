@@ -31,7 +31,7 @@ function handleFormPublish() {
 </script>
 <template>
   <div class="flex flex-col">
-    <h3 class="font-bold text-2xl text-center mb-4">mininote {{ loading }}</h3>
+    <h3 class="font-bold text-2xl text-center mb-4">mininote</h3>
     <div class="flex flex-col gap-y-2">
       <label class="font-black text-sm" for="note">start writing:</label>
       <textarea
