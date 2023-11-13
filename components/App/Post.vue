@@ -108,8 +108,8 @@ const author = props.post.author;
         <!-- avatar img or downsaur icon -->
         <div class="flex flex-row items-center gap-4">
           <NuxtLink
-            to="/"
-            class="w-[52px] h-[52px] min-w-[52px] min-h-[52px] rounded-full bg-warning text-warning-content overflow-hidden"
+            :to="`/minitalker/${author.username}`"
+            class="w-[52px] h-[52px] min-w-[52px] min-h-[52px] rounded-full bg-warning text-warning-content border-2 border-warning overflow-hidden"
           >
             <img
               class="w-full h-full p-[12px] flex justify-center items-center"
@@ -126,7 +126,7 @@ const author = props.post.author;
           </NuxtLink>
           <div class="flex flex-col">
             <NuxtLink
-              to="/"
+              :to="`/minitalker/${author.username}`"
               class="w-fit font-black link link-hover hover:text-warning"
             >
               {{ author.username }}
@@ -228,7 +228,7 @@ const author = props.post.author;
       <div v-for="media in mininote.mediaFiles" :key="media.id">
         <img
           v-if="isImage(media.url)"
-          class="flex rounded-xl"
+          class="block rounded-xl"
           :src="media.url"
           alt=""
         />
