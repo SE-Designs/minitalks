@@ -9,8 +9,6 @@ export default function () {
       form.append("media_file_" + index, file);
     });
 
-    console.log(form);
-
     return await useProtectedFetch(`/api/user/mininote`, {
       method: "POST",
       body: form,

@@ -11,17 +11,19 @@ const loading = ref(false);
 async function handleSubmit(data: any) {
   loading.value = true;
   try {
-    const response = await publishMininote({
+    const response = (await publishMininote({
       content: data.content,
       media: data.media,
       replyTo: data.replyTo,
-    });
+    })) as any;
 
-    console.log(response);
+    navigateTo(`/mininote/${response.mininote.id}`);
   } catch (error) {
     console.error(`PUBLISH MININOTE ERR: ${error}`);
   } finally {
     loading.value = false;
+
+    useWriteModal({});
   }
 }
 </script>
