@@ -16,7 +16,7 @@ const mininote = props.post;
 const author = props.post.author;
 </script>
 <template>
-  <article class="flex flex-col gap-y-4 items-center sm:flex-row">
+  <article class="flex flex-col gap-y-4 items-stretch sm:flex-row">
     <div
       class="ml-auto mr-0 w-fit flex flex-row items-center gap-x-2 sm:hidden"
     >
@@ -282,14 +282,6 @@ const author = props.post.author;
       </button>
     </aside>
   </article>
-  <NuxtLink
-    v-if="mininote.repliesNumber > 0"
-    :to="`/mininote/${mininote.id}`"
-    class="btn w-full hover:btn-warning sm:w-[calc(100%-64px)]"
-  >
-    <Icon name="pixelarticons:arrow-right" />
-    <span>SEE COMMENTS ({{ mininote.repliesNumber }})</span>
-  </NuxtLink>
 </template>
 <style scoped>
 pre {
