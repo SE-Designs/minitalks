@@ -4,13 +4,17 @@ const props = defineProps({
     type: [Array, Object],
     required: true,
   } as any,
+  user: {
+    type: Object,
+    required: false,
+  },
 });
 
 function isCommentsExist(mininote: any) {
   if (mininote.repliesNumber > 0)
     return `SEE COMMENTS (${mininote.repliesNumber})`;
 
-  return `REPLY TO ${mininote.author.username}`;
+  return `REPLY TO ${mininote.author.username || props?.user?.username}`;
 }
 
 const isSinglePost = computed(() => {
@@ -34,7 +38,7 @@ const isSinglePost = computed(() => {
             isSinglePost
               ? useWriteModal({
                   id: mininote.id,
-                  username: mininote.author.username,
+                  username: mininote.author.username || props?.user?.username,
                 })
               : ''
           "
