@@ -36,9 +36,9 @@ async function handleSubmit(data: any) {
       <div class="my-12 w-full">
         <div class="flex flex-col gap-8 w-full px-4">
           <div class="flex flex-col gap-2 text-center">
-            <h2 class="font-bold text-3xl">
+            <NuxtLink to="/" class="font-bold text-3xl">
               its <span class="text-gradient">minitalks</span>
-            </h2>
+            </NuxtLink>
             <p class="text-xs">
               How are you {{ user?.username }}?
               <span

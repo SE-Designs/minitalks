@@ -132,7 +132,7 @@ const author = props.post.author;
               {{ author.username }}
             </NuxtLink>
             <NuxtLink
-              :to="`/mininotes/${mininote.replyTo.id}`"
+              :to="`/mininote/${mininote.replyTo.id}`"
               class="w-fit text-sm font-bold link link-hover hover:opacity-100 opacity-60"
               v-if="mininote.replyTo"
             >
