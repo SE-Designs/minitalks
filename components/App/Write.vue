@@ -24,11 +24,6 @@ function handleUploadImage(event: any) {
 }
 
 function handleFormPublish() {
-  // console.log({
-  //   content: content.value,
-  //   media: uploadFile && uploadFile[0] !== undefined ? [uploadFile.value] : [],
-  //   replyTo: isWriteReply.value.id,
-  // });
   emit("onSubmit", {
     content: content.value,
     media: uploadFile && uploadFile[0] !== undefined ? [uploadFile.value] : [],

@@ -30,7 +30,14 @@ const isSinglePost = computed(() => {
         <AppPost :post="mininote" />
         <NuxtLink
           :to="`/mininote/${mininote.id}`"
-          @click="isSinglePost ? useWriteModal({}) : ''"
+          @click="
+            isSinglePost
+              ? useWriteModal({
+                  id: mininote.id,
+                  username: mininote.author.username,
+                })
+              : ''
+          "
           class="btn w-full hover:btn-warning sm:w-[calc(100%-64px)]"
         >
           <Icon name="pixelarticons:arrow-right" />
@@ -45,7 +52,7 @@ const isSinglePost = computed(() => {
             <h4 class="font-bold">Comments: {{ mininote.repliesNumber }}</h4>
           </div>
           <div
-            class="flex flex-col gap-y-2 mb-2"
+            class="flex flex-col gap-y-6 mb-4"
             v-for="comment in mininote.replies"
             :key="comment.id"
           >
