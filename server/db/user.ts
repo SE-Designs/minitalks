@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import client from ".";
+import prisma from ".";
 
 function createUser(userData: any) {
   const userFinal = {
@@ -7,13 +7,13 @@ function createUser(userData: any) {
     password: bcrypt.hashSync(userData.password, 10),
   };
 
-  return client?.user.create({
+  return prisma?.user.create({
     data: userFinal,
   });
 }
 
 function getUserByUsername(username: string) {
-  return client.user.findUnique({
+  return prisma.user.findUnique({
     where: {
       username,
     },
@@ -21,7 +21,7 @@ function getUserByUsername(username: string) {
 }
 
 function getUserByEmail(email: string) {
-  return client.user.findUnique({
+  return prisma.user.findUnique({
     where: {
       email,
     },
@@ -29,7 +29,7 @@ function getUserByEmail(email: string) {
 }
 
 function getUserById(userId: string) {
-  return client.user.findUnique({
+  return prisma.user.findUnique({
     where: {
       id: userId,
     },
