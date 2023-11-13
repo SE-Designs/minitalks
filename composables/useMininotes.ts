@@ -24,7 +24,7 @@ export default function () {
 
         resolve(response);
       } catch (error) {
-        console.error(`MININOTES GET ERR: ${error}`);
+        console.error(`GET MININOTES ERR: ${error}`);
 
         reject(error);
       }
@@ -43,12 +43,33 @@ export default function () {
 
         resolve(response);
       } catch (error) {
-        console.error(`MININOTE GET ERR: ${error}`);
+        console.error(`GET MININOTE BY ID ERR: ${error}`);
 
         reject(error);
       }
     });
   }
 
-  return { publishMininote, getHomeMininotes, getMininoteById };
+  async function getUserMininotesByUsername(username: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await useProtectedFetch(`/api/user/${username}`, {
+          method: "GET",
+        });
+
+        resolve(response);
+      } catch (error) {
+        console.error(`GET USER MININOTES ERR: ${error}`);
+
+        reject(error);
+      }
+    });
+  }
+
+  return {
+    publishMininote,
+    getHomeMininotes,
+    getMininoteById,
+    getUserMininotesByUsername,
+  };
 }
