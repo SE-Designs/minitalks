@@ -40,6 +40,15 @@ const author = props.post.author;
           class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
         >
           <li>
+            <NuxtLink
+              :to="`/mininote/${mininote.id}`"
+              class="w-full flex flex-row gap-x-4 items-center"
+            >
+              <Icon name="pixelarticons:arrow-right-box" />
+              <span>Go to mininote</span>
+            </NuxtLink>
+          </li>
+          <li>
             <p class="w-full flex flex-row gap-x-4 items-center">
               <Icon name="pixelarticons:edit" />
               <span>Edit</span>
@@ -68,6 +77,15 @@ const author = props.post.author;
           tabindex="0"
           class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
         >
+          <li>
+            <NuxtLink
+              :to="`/mininote/${mininote.id}`"
+              class="w-full flex flex-row gap-x-4 items-center"
+            >
+              <Icon name="pixelarticons:arrow-right-box" />
+              <span>Go to mininote</span>
+            </NuxtLink>
+          </li>
           <li>
             <p class="w-full flex flex-row gap-x-4 items-center">
               <Icon name="pixelarticons:downasaur" />
@@ -143,6 +161,15 @@ const author = props.post.author;
               class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
             >
               <li>
+                <NuxtLink
+                  :to="`/mininote/${mininote.id}`"
+                  class="w-full flex flex-row gap-x-4 items-center"
+                >
+                  <Icon name="pixelarticons:arrow-right-box" />
+                  <span>Go to mininote</span>
+                </NuxtLink>
+              </li>
+              <li>
                 <p class="w-full flex flex-row gap-x-4 items-center">
                   <Icon name="pixelarticons:edit" />
                   <span>Edit</span>
@@ -171,6 +198,15 @@ const author = props.post.author;
               tabindex="0"
               class="dropdown-content translate-y-4 z-[1] menu p-2 shadow bg-base-300 rounded-box w-52"
             >
+              <li>
+                <NuxtLink
+                  :to="`/mininote/${mininote.id}`"
+                  class="w-full flex flex-row gap-x-4 items-center"
+                >
+                  <Icon name="pixelarticons:arrow-right-box" />
+                  <span>Go to mininote</span>
+                </NuxtLink>
+              </li>
               <li>
                 <p class="w-full flex flex-row gap-x-4 items-center">
                   <Icon name="pixelarticons:downasaur" />
