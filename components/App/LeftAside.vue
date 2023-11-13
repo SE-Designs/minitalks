@@ -1,43 +1,5 @@
 <script setup lang="ts">
-const { useAuthUser } = await useAuth();
-const user = (useAuthUser() || "") as any;
-
-const links = ref([
-  {
-    name: "Home",
-    url: "/",
-    icon: "pixelarticons:home",
-    isActive: false,
-  },
-  {
-    name: "Explore",
-    url: "/?new",
-    icon: "pixelarticons:map",
-    isActive: false,
-  },
-  {
-    name: "Profile",
-    url: `/minitalker/${user.value.username}`,
-    icon: "pixelarticons:user",
-    isActive: false,
-  },
-  {
-    name: "Logout",
-    url: "#",
-    icon: "pixelarticons:logout",
-    isActive: false,
-  },
-]) as any;
-
-const url = computed(() => {
-  return useRoute().fullPath;
-});
-
-function isActiveLink(link: string) {
-  if (url.value === link) return true;
-
-  return false;
-}
+const { links, isActiveLink } = await useNavLinks();
 </script>
 <template>
   <aside

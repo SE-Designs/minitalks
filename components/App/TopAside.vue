@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { links, isActiveLink } = await useNavLinks();
+</script>
 <template>
   <aside
     class="flex flex-col gap-4 justify-center items-center w-full md:hidden"
@@ -161,10 +163,10 @@
     </dialog>
   </aside>
   <nav
-    class="fixed left-1/2 bottom-0 pb-12 flex flex-row justify-center items-center gap-x-4 max-h-[64px] -translate-x-1/2 sm:hidden"
+    class="fixed left-1/2 bottom-0 pb-12 flex flex-row justify-center items-center gap-x-4 max-h-[64px] z-50 -translate-x-1/2 sm:hidden"
   >
     <div
-      class="flex flex-row gap-x-4 rounded-lg p-2 border border-neutral backdrop-blur"
+      class="flex flex-row gap-x-4 rounded-lg p-2 border border-neutral-700 backdrop-blur"
       style="
         background: linear-gradient(
           to bottom,
@@ -173,21 +175,22 @@
         );
       "
     >
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:home" class="block xl:hidden" />
-      </NuxtLink>
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:map" class="block xl:hidden" />
-      </NuxtLink>
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:user" class="block xl:hidden" />
+      <NuxtLink
+        v-for="link in links"
+        :key="link.name"
+        :to="link.url"
+        :class="
+          isActiveLink(link.url)
+            ? 'btn btn-primary bg-opacity-40'
+            : 'btn btn-ghost'
+        "
+      >
+        <Icon :name="link.icon" class="block xl:hidden" />
+        <span class="hidden xl:inline">{{ link.name }}</span>
       </NuxtLink>
       <div class="btn btn-ghost" @click="useWriteModal({})">
         <Icon name="pixelarticons:edit" />
       </div>
-      <NuxtLink to="/" class="btn btn-ghost">
-        <Icon name="pixelarticons:logout" class="block xl:hidden" />
-      </NuxtLink>
     </div>
   </nav>
 </template>
