@@ -30,7 +30,7 @@ onBeforeMount(async () => {
 });
 </script>
 <template>
-  <div class="flex flex-col gap-y-8 flex-1">
+  <div class="flex flex-col gap-y-4 flex-1">
     <AppFilter />
     <AppMainFallback v-if="loading" />
     <AppMainSection

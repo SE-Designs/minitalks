@@ -20,6 +20,7 @@ async function getMininotes() {
 
     mininote.value = response;
   } catch (error) {
+    console.error(`GET MININOTE BY ID ERR: ${error}`);
   } finally {
     loading.value = false;
   }
@@ -30,7 +31,7 @@ onBeforeMount(async () => {
 });
 </script>
 <template>
-  <div class="flex flex-col gap-y-8 flex-1">
+  <div class="flex flex-col gap-y-4 flex-1">
     <AppMainFallback v-if="loading" />
     <AppMainNotFound v-else-if="isPromise(mininote)" />
     <AppMainSection v-else-if="mininote" :posts="mininote" />
