@@ -41,7 +41,13 @@ export type UserType = {
 
 export type PublicUserType = Pick<
   UserType,
-  "id" | "email" | "username" | "avatar" | "following" | "mininote"
+  | "id"
+  | "email"
+  | "username"
+  | "avatar"
+  | "following"
+  | "createdAt"
+  | "mininote"
 >;
 
 export type ShortUserType = Pick<
