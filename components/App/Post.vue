@@ -241,7 +241,7 @@ const author = props.post.author;
       </div>
     </div>
     <aside
-      class="flex flex-row justify-between gap-y-2 gap-x-6 items-center sm:ml-6 sm:justify-center sm:flex-col"
+      class="flex flex-row mx-auto w-fit justify-between gap-y-2 gap-x-6 items-center sm:ml-6 sm:justify-center sm:flex-col"
     >
       <button
         class="flex flex-row items-center text-center gap-2 w-full cursor-pointer sm:flex-col sm:gap-1"

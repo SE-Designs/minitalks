@@ -35,12 +35,8 @@ onBeforeMount(async () => {
 <template>
   <div class="flex flex-col gap-y-4 flex-1">
     <AppUserProfile v-if="author" :user="author" />
-
+    <!-- FILTERS? -->
     <AppMainFallback v-if="loading" />
-
-    <!-- <p v-if="mininotes">
-      {{ mininotes }}
-    </p> -->
     <AppMainNotFound v-else-if="isPromise(mininotes)" />
     <AppMainSection v-else-if="mininotes" :posts="mininotes" :user="author" />
     <AppMainError v-else />
