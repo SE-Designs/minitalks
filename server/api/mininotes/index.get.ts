@@ -2,7 +2,28 @@ import { getMininotes } from "~/server/db/mininote";
 import { mininoteTransformer } from "~/server/transformers/mininote";
 
 export default defineEventHandler(async (event: any) => {
-  const { query } = getQuery(event);
+  const params = getQuery(event);
+
+  const { searchQuery } = params;
+  const { orderByQuery } = params as any;
+
+  console.log(`search: ${searchQuery}`);
+  console.log(`order: ${orderByQuery}`);
+
+  let orderBy = [
+    {
+      createdAt: "desc",
+    },
+  ];
+
+  if (!!orderByQuery) {
+    orderBy = [
+      JSON.parse(orderByQuery),
+      {
+        createdAt: "desc",
+      },
+    ];
+  }
 
   let prismaQuery = {
     include: {
@@ -21,12 +42,15 @@ export default defineEventHandler(async (event: any) => {
     },
     orderBy: [
       {
-        createdAt: "desc",
+        likedIds: "asc",
+      },
+      {
+        createdAt: "asc",
       },
     ],
   } as any;
 
-  if (!!query) {
+  if (!!params) {
     prismaQuery = {
       include: {
         author: true,
@@ -42,14 +66,12 @@ export default defineEventHandler(async (event: any) => {
           },
         },
       },
-      orderBy: [
-        {
-          createdAt: "desc",
-        },
-      ],
+      // orderByQuery:
+      orderBy,
+      // searchQuery:
       where: {
         content: {
-          contains: query,
+          contains: searchQuery,
           mode: "insensitive",
         },
       },
