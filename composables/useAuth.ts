@@ -140,12 +140,13 @@ export default async function () {
   async function signOut() {
     return new Promise(async (resolve, reject) => {
       try {
-        await useProtectedFetch(`/api/auth/logout`, {
+        await useProtectedFetch(`/api/auth/signout`, {
           method: "POST",
         });
 
         setToken(null);
         setUser(null);
+
         resolve(true);
       } catch (error) {
         console.error(`SIGN OUT ERR: ${error}`);

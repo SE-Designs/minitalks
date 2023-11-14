@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  sendRefreshToken(event.res, "");
+  sendRefreshToken(event, "");
 
   return { message: "Done" };
 });
