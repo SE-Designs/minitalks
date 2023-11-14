@@ -76,7 +76,7 @@ async function handleSignIn() {
             id="signin-username"
             type="text"
             v-model.value="signInValue.username"
-            maxlength="12"
+            maxlength="24"
             placeholder="Email or username"
             class="input input-bordered w-full text-white"
           />
@@ -124,7 +124,7 @@ async function handleSignIn() {
             id="signup-email"
             type="email"
             v-model.value="signUpValue.email"
-            maxlength="12"
+            maxlength="24"
             placeholder="Email"
             class="input input-bordered w-full text-white"
           />
@@ -185,9 +185,13 @@ async function handleSignIn() {
       <h1 class="text-5xl font-black mb-8">
         <span v-if="auth === 'sign-in'">Hello, </span>
         <span v-else>Welcome, </span>
-        <span class="text-gradient" v-if="auth === 'sign-in'">{{
-          signInValue.username ? signInValue.username : "minitalker"
-        }}</span>
+        <span
+          class="text-gradient overflow-hidden break-all"
+          v-if="auth === 'sign-in'"
+          >{{
+            signInValue.username ? signInValue.username : "minitalker"
+          }}</span
+        >
         <span class="text-gradient" v-else>{{
           signUpValue.username ? signUpValue.username : "minitalker"
         }}</span>
