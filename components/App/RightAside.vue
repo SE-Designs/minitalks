@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { search, startSearch } = await useSearch();
+</script>
 <template>
   <aside
     class="hidden flex-col gap-y-4 mx-auto xl:gap-y-8 w-[280px] h-fit md:flex sticky left-0 top-[108px]"
@@ -7,11 +9,13 @@
       class="flex flex-row justify-center items-center w-full gap-x-4 max-w-[360px] xl:gap-x-6"
     >
       <input
-        type="text"
+        type="search"
         placeholder="Search..."
         class="input input-primary input-bordered w-full"
+        v-model.value="search"
+        @keypress.enter="startSearch"
       />
-      <div class="btn btn-primary">
+      <div class="btn btn-primary" @click="startSearch">
         <Icon name="pixelarticons:search" />
       </div>
     </div>

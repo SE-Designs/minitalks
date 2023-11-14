@@ -1,5 +1,17 @@
 <script setup lang="ts">
 const { links, isActiveLink } = await useNavLinks();
+const { search, startSearch } = await useSearch();
+const { signOut } = await useAuth();
+
+async function signoutEvent() {
+  try {
+    await signOut();
+
+    navigateTo(`/auth#sign-in`);
+  } catch (error) {
+    console.error(`SIGN OUT ERR: ${error}`);
+  }
+}
 </script>
 <template>
   <aside
@@ -23,11 +35,13 @@ const { links, isActiveLink } = await useNavLinks();
       class="flex flex-row justify-center items-center w-full gap-x-4 max-w-[360px]"
     >
       <input
-        type="text"
+        type="search"
         placeholder="Search..."
         class="input input-primary input-bordered w-full"
+        v-model.value="search"
+        @keypress.enter="startSearch"
       />
-      <div class="btn btn-primary">
+      <div class="btn btn-primary" @click="startSearch">
         <Icon name="pixelarticons:search" />
       </div>
     </div>
@@ -188,6 +202,9 @@ const { links, isActiveLink } = await useNavLinks();
         <Icon :name="link.icon" class="block xl:hidden" />
         <span class="hidden xl:inline">{{ link.name }}</span>
       </NuxtLink>
+      <div class="btn btn-ghost" @click="signoutEvent">
+        <Icon name="pixelarticons:logout" />
+      </div>
       <div class="btn btn-ghost" @click="useWriteModal({})">
         <Icon name="pixelarticons:edit" />
       </div>
