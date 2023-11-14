@@ -6,16 +6,16 @@ definePageMeta({
 });
 
 const { useAuthUser } = await useAuth();
-const { getHomeMininotes } = useMininotes();
+const { getMininotes } = useMininotes();
 const user = (useAuthUser() || "") as unknown as ShortUserType;
 
 const homeMininotes = ref([]) as any;
 const loading = ref(false);
 
-async function getMininotes() {
+async function getData() {
   loading.value = true;
   try {
-    const { mininotes }: any = await getHomeMininotes();
+    const { mininotes }: any = await getMininotes();
 
     homeMininotes.value = mininotes;
   } catch (error) {
@@ -26,7 +26,7 @@ async function getMininotes() {
 }
 
 onBeforeMount(async () => {
-  await getMininotes();
+  await getData();
 });
 </script>
 <template>

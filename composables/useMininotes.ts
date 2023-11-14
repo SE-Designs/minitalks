@@ -15,11 +15,12 @@ export default function () {
     });
   }
 
-  async function getHomeMininotes() {
+  async function getMininotes(params: any = {}) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await useProtectedFetch(`/api/mininotes`, {
           method: "GET",
+          params,
         });
 
         resolve(response);
@@ -68,7 +69,7 @@ export default function () {
 
   return {
     publishMininote,
-    getHomeMininotes,
+    getMininotes,
     getMininoteById,
     getUserMininotesByUsername,
   };
