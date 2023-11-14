@@ -1,5 +1,3 @@
-import type { ShortUserType } from "~/types/types";
-
 export default defineNuxtRouteMiddleware(async (event) => {
   if (process.server) return;
 
@@ -8,12 +6,14 @@ export default defineNuxtRouteMiddleware(async (event) => {
   const user = (useAuthUser() || "") as any;
 
   watch(loading, () => {
-    console.log(`auth middleware says: ${user.value.username} ${!event.path}`);
+    console.log(
+      `auth middleware says: ${user?.value?.username} ${!event.path}`
+    );
 
-    if (!event.path.startsWith(`/auth`, 0) && !user.value.username) {
+    if (!event.path.startsWith(`/auth`, 0) && !user?.value) {
       console.log("auth middleware redirect to /auth");
       return navigateTo(`/auth`);
-    } else if (event.path.startsWith(`/auth`, 0) && user.value.username) {
+    } else if (event.path.startsWith(`/auth`, 0) && user?.value) {
       console.log("auth middleware redirect to /");
       return navigateTo(`/`);
     }

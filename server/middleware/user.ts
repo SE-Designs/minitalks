@@ -4,6 +4,7 @@ import { decodeAccessToken } from "~/utils/decodeTokens";
 import { getUserById } from "../db/user";
 
 export default defineEventHandler(async (event) => {
+  // rewrite from url-pattern to regexp pattern
   const endpoints = [
     "/api/auth/user",
     "/api/auth/user/",
@@ -13,7 +14,10 @@ export default defineEventHandler(async (event) => {
     "/api/mininotes/",
     "/api/mininotes/:id",
     "/api/mininotes/:id/",
+    "/api/mininotes/?:query",
   ];
+
+  console.log(`event path - ${event.path}`);
 
   const isHandledByThisMiddleware = endpoints.some((endopoint) => {
     const pattern = new UrlPattern(endopoint);
