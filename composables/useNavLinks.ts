@@ -21,12 +21,6 @@ export default async function () {
       icon: "pixelarticons:user",
       isActive: false,
     },
-    {
-      name: "Logout",
-      url: "#",
-      icon: "pixelarticons:logout",
-      isActive: false,
-    },
   ]) as any;
 
   const url = computed(() => {
