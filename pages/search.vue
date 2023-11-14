@@ -23,7 +23,7 @@ async function getData() {
   loading.value = true;
   try {
     const { mininotes }: any = await getMininotes({
-      query: searchQuery.value,
+      searchQuery: searchQuery.value,
     });
 
     searchMininotes.value = mininotes;
