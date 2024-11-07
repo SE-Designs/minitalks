@@ -27,6 +27,8 @@
   "type": "module",
   "dependencies": {
     "@prisma/client": "5.5.2",
+    "@vueuse/components": "^10.6.1",
+    "@vueuse/core": "^10.6.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.0",
     "formidable": "^3.5.1",

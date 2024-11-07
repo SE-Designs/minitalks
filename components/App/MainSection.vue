@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useInfiniteScroll } from "@vueuse/core";
+import { vInfiniteScroll } from "@vueuse/components";
+
 const props = defineProps({
   posts: {
     type: [Array, Object],
@@ -9,6 +12,23 @@ const props = defineProps({
     required: false,
   },
 });
+
+const emits = defineEmits(["load"]);
+
+// const infiniteScroll = ref<HTMLElement | null>(null);
+// useInfiniteScroll(
+//   infiniteScroll,
+//   () => {
+//     emits("load");
+//   },
+//   {
+//     distance: 25,
+//     throttle: 200,
+//     behavior: "smooth",
+//     direction: "bottom",
+//     interval: 500,
+//   }
+// );
 
 function isCommentsExist(mininote: any) {
   if (mininote.repliesNumber > 0)
@@ -25,7 +45,10 @@ const isSinglePost = computed(() => {
 </script>
 <template>
   <section class="flex flex-col gap-y-4 flex-1">
-    <div class="flex flex-col bg-neutral rounded-lg p-6 xl:p-8 mb-28 sm:mb-0">
+    <div
+      ref="infiniteScroll"
+      class="flex flex-col bg-neutral rounded-lg p-6 xl:p-8 mb-28 sm:mb-0"
+    >
       <div
         class="flex flex-col gap-4 w-full"
         v-for="mininote in props.posts"
@@ -65,6 +88,7 @@ const isSinglePost = computed(() => {
           </div>
         </div>
       </div>
+      <button class="btn btn-success" @click="emits('load')">LOAD MORE</button>
     </div>
   </section>
 </template>

@@ -7,9 +7,12 @@ async function createMininote(mininoteData: any) {
 }
 
 async function getMininotes(params: any = {}) {
-  return prisma.mininote.findMany({
-    ...params,
-  });
+  return prisma.$transaction([
+    prisma.mininote.count(),
+    prisma.mininote.findMany({
+      ...params,
+    }),
+  ]);
 }
 
 async function getMininoteById(mininoteId: string, params: any = {}) {

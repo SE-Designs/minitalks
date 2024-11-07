@@ -9,30 +9,37 @@ const { useAuthUser } = await useAuth();
 const { getMininotes } = useMininotes();
 const user = (useAuthUser() || "") as unknown as ShortUserType;
 
-const homeMininotes = ref([]) as any;
+const mininotesVal = ref([]) as any;
 const loading = ref(false);
+const last = ref(0);
 
-async function getData(sort: string = "") {
+async function loadData(sort: string = "", repeat: boolean = false) {
   loading.value = true;
+
+  if (repeat) {
+    last.value = 0;
+    mininotesVal.value = [];
+  }
+
   try {
-    const params = ref();
+    const sortBy = ref();
 
     switch (sort) {
       // most liked:
       case "best":
-        params.value = {
+        sortBy.value = {
           likedIds: "asc",
         };
         break;
       // most viewed:
       case "popular":
-        params.value = {
+        sortBy.value = {
           viewedIds: "asc",
         };
         break;
       // most discussed:
       case "interesting":
-        params.value = {
+        sortBy.value = {
           replies: {
             _count: "desc",
           },
@@ -40,37 +47,47 @@ async function getData(sort: string = "") {
         break;
       // just latest:
       default:
-        params.value = {
+        sortBy.value = {
           createdAt: "desc",
         };
         break;
     }
 
-    const { mininotes }: any = await getMininotes({
-      orderByQuery: params.value,
+    const { total, mininotes }: any = await getMininotes({
+      orderByQuery: sortBy.value,
+      lastCursorPoint: last.value,
     });
 
-    homeMininotes.value = mininotes;
+    if (last.value >= total) {
+      console.log("OUT OF STOCKS");
+    }
+
+    mininotesVal.value.push(...mininotes);
   } catch (error) {
     console.error(`GET HOME MININOTE ERR: ${error}`);
   } finally {
     loading.value = false;
+    last.value = mininotesVal.value.length;
   }
 }
 
 onBeforeMount(async () => {
-  await getData();
+  await loadData();
 });
 </script>
 <template>
   <div class="flex flex-col gap-y-4 flex-1">
-    <AppFilter @set-show="getData($event)" />
-    <AppMainFallback v-if="loading" />
+    {{ last }}
+    <AppFilter @set-show="loadData($event, true)" />
+    <AppMainFallback v-if="loading && last === 0" />
     <AppMainSection
-      v-else-if="homeMininotes.length > 0"
-      :posts="homeMininotes"
+      v-else-if="mininotesVal.length > 0"
+      @load="loadData"
+      :posts="mininotesVal"
     />
-    <AppMainNotFound v-else-if="homeMininotes.length === 0" />
+
+    <AppMainNotFound v-else-if="mininotesVal.length === 0" />
     <AppMainError v-else />
+    <AppMainFallback v-if="loading && mininotesVal.length > 0 && last !== 0" />
   </div>
 </template>

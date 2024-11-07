@@ -6,9 +6,13 @@ export default defineEventHandler(async (event: any) => {
 
   const { searchQuery } = params;
   const { orderByQuery } = params as any;
+  const { lastCursorPoint } = params;
 
   console.log(`search: ${searchQuery}`);
   console.log(`order: ${orderByQuery}`);
+  console.log(`cursor: ${Number(lastCursorPoint)}`);
+
+  const showPerPage = 4;
 
   let orderBy = [
     {
@@ -40,6 +44,7 @@ export default defineEventHandler(async (event: any) => {
         },
       },
     },
+    take: showPerPage,
     orderBy: [
       {
         likedIds: "asc",
@@ -66,6 +71,8 @@ export default defineEventHandler(async (event: any) => {
           },
         },
       },
+      take: showPerPage,
+
       // orderByQuery:
       orderBy,
       // searchQuery:
@@ -78,9 +85,14 @@ export default defineEventHandler(async (event: any) => {
     };
   }
 
-  const mininotes = await getMininotes(prismaQuery);
+  const [total, mininotes] = await getMininotes(prismaQuery);
+
+  if (Number(lastCursorPoint) >= total) {
+    return;
+  }
 
   return {
+    total: total,
     mininotes: mininotes.map(mininoteTransformer),
   };
 });
